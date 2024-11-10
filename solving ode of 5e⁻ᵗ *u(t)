@@ -1,0 +1,25 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.integrate import odeint
+
+def di_dt(i,t):
+  r=30000
+  rc=3
+
+  if t<0:
+    u=0
+  else:
+    u=1
+  if  t==0:
+    delta=1
+  else:
+    delta=0
+
+  didt=(5/r)*np.exp(-t)*delta-(5/r)*np.exp(-t)*u-i/(rc)
+  return didt
+
+t=np.arange(0,20,0.01)
+i0=5/30000
+i=odeint(di_dt,i0,t)
+plt.plot(t,i)
+plt.show()
